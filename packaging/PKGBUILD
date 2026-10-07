@@ -1,0 +1,21 @@
+# Maintainer: openOODA-tools <ops@openooda.org>
+pkgname=oostty-bin
+_pkgname=oostty
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Sovereign terminal driver mode switcher with baud, echo, and interrupt protection."
+arch=('x86_64')
+url="https://github.com/openOODA-tools/oostty"
+license=('Apache-2.0')
+depends=('glibc')
+provides=('oostty')
+conflicts=('oostty')
+source_x86_64=("${url}/releases/download/v${pkgver}/oostty-linux-x86_64"
+               "uninstall.sh::https://raw.githubusercontent.com/openOODA-tools/${_pkgname}/v${pkgver}/uninstall.sh")
+sha256sums_x86_64=('SKIP'
+                   'SKIP')
+
+package() {
+    install -Dm755 "${srcdir}/oostty-linux-x86_64" "${pkgdir}/usr/bin/oostty"
+    install -Dm755 uninstall.sh "${pkgdir}/usr/bin/oostty-uninstall"
+}
